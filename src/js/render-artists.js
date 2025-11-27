@@ -39,17 +39,45 @@ export function renderPagination(page, totalPages) {
   `;
 
   // Pages
-  for (let i = 1; i <= totalPages; i++) {
-    // прикриваємо зайві номери, якщо їх > 7
-    if (i === 1 || i === totalPages || Math.abs(i - page) <= 1) {
-      html += `
-        <button class="page-btn ${i === page ? 'active' : ''}" data-page="${i}">
-          ${i}
-        </button>
-      `;
-    } else if (i === page - 2 || i === page + 2) {
-      html += `<span class="dots">...</span>`;
-    }
+  // First page
+  html += `<button class="page-btn ${
+    page === 1 ? 'active' : ''
+  }" data-page="1">1</button>`;
+
+  // Dots after first page
+  if (page > 3) {
+    html += `<span class="dots">...</span>`;
+  }
+
+  // Previous neighbor
+  if (page > 2) {
+    html += `<button class="page-btn" data-page="${page - 1}">${
+      page - 1
+    }</button>`;
+  }
+
+  // Current page (if not first and not last)
+  if (page !== 1 && page !== totalPages) {
+    html += `<button class="page-btn active" data-page="${page}">${page}</button>`;
+  }
+
+  // Next neighbor
+  if (page < totalPages - 1) {
+    html += `<button class="page-btn" data-page="${page + 1}">${
+      page + 1
+    }</button>`;
+  }
+
+  // Dots before last page
+  if (page < totalPages - 2) {
+    html += `<span class="dots">...</span>`;
+  }
+
+  // Last page
+  if (totalPages > 1) {
+    html += `<button class="page-btn ${
+      page === totalPages ? 'active' : ''
+    }" data-page="${totalPages}">${totalPages}</button>`;
   }
 
   // → Next

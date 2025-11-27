@@ -6,8 +6,7 @@ export const PER_PAGE = 8;
 
 export async function getAllGenres() {
   const response = await axios.get('/genres');
-
-  return response.data.genres;
+  return response.data;
 }
 
 export async function getArtists(query = {}, page = 1) {
