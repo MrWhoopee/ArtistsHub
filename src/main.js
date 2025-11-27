@@ -14,25 +14,29 @@ import { artistModalPagesEl, searchFormEl } from './js/refs';
 
 let currentPage = 1;
 let currentQuery = {};
-const result = await getArtistInfoById('65b0fda6ba67998416821076');
-const { artists, totalArtists } = await getArtists();
 
-renderArtistModalPreview(result);
-renderArtistModalAlbumsList(result);
-renderArtistList(artists);
-renderPagination(currentPage, getTotalPages(totalArtists));
+// TESTS!!!!!!!!!!!!!!!!!!!!!!!!!
+// const result = await getArtistInfoById('65b0fda6ba67998416821076');
+// const { artists, totalArtists } = await getArtists();
 
-artistModalPagesEl.addEventListener('click', async event => {
-  const btn = event.target.closest('.page-btn');
-  if (!btn || btn.disabled || btn.classList.contains('active')) return;
+// renderArtistModalPreview(result);
+// renderArtistModalAlbumsList(result);
+// renderArtistList(artists);
+// renderPagination(currentPage, getTotalPages(totalArtists));
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  const newPage = Number(btn.dataset.page);
-  currentPage = newPage;
+// EVENT LISTENERS
+// artistModalPagesEl.addEventListener('click', async event => {
+//   const btn = event.target.closest('.page-btn');
+//   if (!btn || btn.disabled || btn.classList.contains('active')) return;
 
-  const { artists, totalArtists } = await getArtists({}, currentPage);
-  renderArtistList(artists);
-  renderPagination(currentPage, getTotalPages(totalArtists));
-});
+//   const newPage = Number(btn.dataset.page);
+//   currentPage = newPage;
+
+//   const { artists, totalArtists } = await getArtists({}, currentPage);
+//   renderArtistList(artists);
+//   renderPagination(currentPage, getTotalPages(totalArtists));
+// });
 
 // searchFormEl.addEventListener('submit', async event => {
 //   event.preventDefault();
