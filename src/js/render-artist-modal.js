@@ -18,7 +18,7 @@ export function renderArtistModalPreview(artist) {
 
   const artistModalPreview = `<div class="artist-modal-preview">
     <img class="artist-modal-preview-thumb" src="${strArtistThumb}" alt="${strArtist}">
-    <h2 class="artist-modal-preview-name">${strArtist}</h2>
+    <h5 class="artist-modal-preview-name">${strArtist}</h5>
     <p class="artist-modal-preview-genres">${renderArtistGenresList(genres)}</p>
     <p class="artist-modal-preview-biography">${strBiographyEN}</p>
     <p class="artist-modal-preview-formed-year">${intFormedYear}</p>

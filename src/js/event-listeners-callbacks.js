@@ -6,6 +6,7 @@ import { renderPagination } from './render-artists';
 let currentPage = 1;
 let currentQuery = {};
 let previousInputValue = '';
+let previousSelector = null;
 
 export async function onSearchArtistsByInput(e) {
   try {
@@ -30,7 +31,6 @@ export async function onSearchArtistsByInput(e) {
     );
     renderArtistList(artists);
     renderPagination(currentPage, getTotalPages(totalArtists));
-    console.log(currentQuery);
   } catch (error) {
     console.log(error);
   }
@@ -39,8 +39,12 @@ export async function onSearchArtistsByInput(e) {
 export async function onSearchArtistsByClick(e) {
   try {
     if (e.target.tagName === 'BUTTON') {
-      e.target.nextElementSibling.classList.toggle('is-hidden');
-      previousSelector = e.target.nextElementSibling;
+      const nextElementSibling = e.target.nextElementSibling;
+      nextElementSibling.classList.toggle('is-hidden');
+      if (previousSelector && previousSelector !== nextElementSibling) {
+        previousSelector.classList.add('is-hidden');
+      }
+      previousSelector = nextElementSibling;
       return;
     }
 
@@ -91,7 +95,6 @@ export async function onSearchArtistsByClick(e) {
           );
           renderArtistList(artists);
           renderPagination(currentPage, getTotalPages(totalArtists));
-          console.log(currentQuery);
         }
       }
 
@@ -111,7 +114,6 @@ export async function onArtistModalPagesClick(e) {
 
   const newPage = Number(btn.dataset.page);
   currentPage = newPage;
-  console.log(currentPage);
 
   const { artists, totalArtists } = await getArtists(currentQuery, currentPage);
   renderArtistList(artists);
