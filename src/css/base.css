@@ -36,7 +36,7 @@ button {
   padding: 8px 16px;
   outline: none;
   border: transparent;
-  background-color: #4e75ff;
+  /* background-color: #4e75ff; */
   color: #fff;
   cursor: pointer;
 
@@ -45,7 +45,7 @@ button {
   line-height: 1.5;
   letter-spacing: 0.04em;
 
-  &:hover {
+  /* &:hover {
     background-color: #6c8cff;
-  }
+  } */
 }

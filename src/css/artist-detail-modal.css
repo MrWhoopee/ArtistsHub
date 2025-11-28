@@ -48,6 +48,8 @@ body {
   position: absolute;
   top: 16px;
   right: 16px;
+  width: 32px;
+  height: 32px;
   border: none;
   background-color: transparent;
   padding: 0;
@@ -64,6 +66,15 @@ body {
     top: 16px;
     right: 16px;
   }
+}
+
+.modal-close-svg {
+  fill: #fff;
+  /* filter: drop-shadow(0 0 4px white); */
+}
+
+.modal-youtube-svg {
+  fill: #fff;
 }
 
 .modal-main-heading {
