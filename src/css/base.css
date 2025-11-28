@@ -1,31 +1,21 @@
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
-  padding: 0;
+  font-weight: 400;
+  color: var(--color-scheme-1-text);
   font-family: var(--font-family);
-  color: var(--color-scheme-1-text);
-  background: var(--color-scheme-1-background);
+  background-color: var(--color-scheme-1-background);
 }
 
-h1 {
-  font-family: var(--second-family);
-  font-weight: 700;
-  font-size: 84px;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: var(--color-scheme-1-text);
+.is-hidden {
+  display: none;
 }
 
-h2 {
-  font-family: var(--second-family);
-  font-weight: 700;
-  font-size: 60px;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: var(--color-scheme-1-text);
+/* main {
+  flex-grow: 1;
+}
+
+main:has(.back-link) {
+  text-align: center;
 }
 
 h4 {
@@ -46,15 +36,7 @@ h5 {
   color: var(--color-scheme-1-text);
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-}
+  /* &:hover {
+    background-color: #6c8cff;
+  }
+} */
