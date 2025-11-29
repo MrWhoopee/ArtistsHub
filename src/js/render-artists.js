@@ -1,8 +1,9 @@
 import { artistListEl, artistModalPagesEl, genresListEl } from './refs';
+import sprite from '../img/sprite.svg';
 
 export function renderArtistCard(artist) {
   const { genres, strArtist, strArtistThumb, strBiographyEN, _id } = artist;
-  const artistCard = `<li class="artist-card" data-id="${_id}"> 
+  const artistCard = `<li class="artist-card"> 
   
     <img  class="artist-thumb" src="${strArtistThumb}" alt="${strArtist}">
     <ul class="artist-genres">
@@ -10,8 +11,8 @@ export function renderArtistCard(artist) {
     </ul>
     <h2 class="artist-name">${strArtist}</h2>
     <p class="artist-biography">${strBiographyEN}</p>
-    <button class="learn-more-btn">Learn More<svg width="24" height="24">
-              <use href="./img/sprite.svg#icon-caret-right"></use>
+    <button class="learn-more-btn" data-id="${_id}">Learn More<svg width="24" height="24">
+              <use href="${sprite}#icon-caret-right"></use>
             </svg></button>
     </li>`;
 
@@ -39,14 +40,23 @@ export function renderGenresList(genres) {
 }
 
 export function renderPagination(page, totalPages) {
+  if (totalPages === 1) {
+    artistModalPagesEl.innerHTML = '';
+    return;
+  }
+  // Kostyli
+  if (page > totalPages) return;
+  // Kostyli
   let html = '';
 
   // ← Previous
   html += `
-    <a href="#artists" class="page-btn" ${
+    <a href="#artists" class="page-btn arrow-btn" ${
       page === 1 ? 'disabled' : ''
     } data-page="${page - 1}">
-      ←
+      <svg width="24" height="24">
+        <use href="${sprite}#left-arrow-btn"></use>
+      </svg>
     </a>
   `;
 
@@ -94,10 +104,12 @@ export function renderPagination(page, totalPages) {
 
   // → Next
   html += `
-    <a href="#artists" class="page-btn" ${
+    <a href="#artists" class="page-btn arrow-btn" ${
       page === totalPages ? 'disabled' : ''
     } data-page="${page + 1}">
-      →
+      <svg width="24" height="24">
+        <use href="${sprite}#right-arrow-btn"></use>
+      </svg>
     </a> 
   `;
 
