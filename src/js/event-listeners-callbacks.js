@@ -1,8 +1,9 @@
 import { getTotalPages } from './helpers';
-import { getArtists } from './soundwawe-api';
+import { getArtistInfoById, getArtists } from './soundwawe-api';
 import { renderArtistList } from './render-artists';
 import { renderPagination } from './render-artists';
-import { backdropWithModalEl, modalCloseButtonEl } from './refs'
+import { backdropWithModalEl } from './refs';
+import { renderArtistModal } from './render-artist-modal';
 // import { document } from 'postcss';
 
 let currentPage = 1;
@@ -131,10 +132,11 @@ export async function onArtistModalPagesClick(e) {
   renderPagination(currentPage, totalPages);
 }
 
-
-
 export async function onLearnMoreClick(e) {
   backdropWithModalEl.classList.add('is-open');
+  console.log(e.target.dataset.id);
+  const artistId = await getArtistInfoById(e.target.dataset.id);
+  renderArtistModal(artistId);
   document.body.style.overflow = 'hidden';
 
   backdropWithModalEl.addEventListener('click', onCloseModal);
