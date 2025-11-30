@@ -66,9 +66,31 @@
   }
 
   @media screen and (min-width: 1440px) {
-    top: 16px;
-    right: 16px;
+    top: 0;
+    right: 0;
+    width: 48px;
+    height: 48px;
   }
+}
+
+/* tooltip */
+.modal-close-button::after {
+  content: 'Close';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 4px;
+  background: #fff;
+  color: var(--color-affair);
+  font-size: 14px;
+  font-family: inherit;
+  opacity: 0;
+  transition: opacity 250ms linear;
+}
+
+.modal-close-button:hover::after {
+  opacity: 1;
 }
 
 .link-modal-artist-track-list {
