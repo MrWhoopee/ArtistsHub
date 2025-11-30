@@ -23,7 +23,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 288px;
-  /* height: 85vh; */
   height: calc(100vh - 128px);
   box-sizing: border-box;
   padding: 52px 8px;
