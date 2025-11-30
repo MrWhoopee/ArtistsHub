@@ -24,6 +24,13 @@ import {
   renderArtistModal,
 } from './js/render-artist-modal';
 
+
+import { initSliders } from './js/hero-slider';
+
+document.addEventListener('DOMContentLoaded', () => {
+  initSliders();
+});
+
 // TESTS!!!!!!!!!!!!!!!!!!!!!!!!!
 // const result = await getArtistInfoById('65b0fda6ba67998416821076');
 // renderArtistModal(result);
