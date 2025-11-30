@@ -1,4 +1,4 @@
-import './js/feedback';
+// import './js/feedback';
 import {
   getFeedbacks,
   getArtistInfoById,
@@ -12,9 +12,12 @@ import {
 import { renderArtistList, renderPagination } from './js/render-artists';
 import { getTotalPages } from './js/helpers';
 import { artistModalPagesEl, searchFormEl } from './js/refs';
+import { initHeader } from './js/header-open-menu';
 
 let currentPage = 1;
 let currentQuery = {};
+
+initHeader();
 
 // TESTS!!!!!!!!!!!!!!!!!!!!!!!!!
 // const result = await getArtistInfoById('65b0fda6ba67998416821076');
