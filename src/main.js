@@ -33,6 +33,7 @@ import {
 } from './js/render-artist-modal';
 
 import { initSliders, renderSlider, getSliderImages } from './js/hero-slider';
+import { initHeader } from './js/header';
 
 // document.addEventListener('DOMContentLoaded', () => {
 //   initSliders();
