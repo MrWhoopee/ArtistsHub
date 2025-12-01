@@ -109,12 +109,19 @@
   }
 }
 
+
 .filters {
   display: none;
   flex-direction: column;
   position: absolute;
+  /* top: calc(100% + 12px); */
 
-  top: 48px;
+  opacity: 0;
+  transform: translateY(-20px);
+
+  pointer-events: none;
+
+  z-index: 9999;
   border-radius: 12px;
   padding: 12px;
   max-width: 289px;
@@ -122,22 +129,29 @@
   gap: 12px;
   box-sizing: border-box;
   background-color: var(--color-scheme-2-foreground);
-  z-index: 9;
-  /* Try to animate */
-  /* top: -136px; */
-  /* transition: top 0.3s ease-in-out; */
-  /* Then top 48px */
-  @media only screen and (min-width: 768px) {
-    max-width: 304px;
-  }
 
-  @media only screen and (min-width: 1440px) {
-    display: flex;
-    background-color: transparent;
+  transition: transform 300ms ease, opacity 250ms ease;
+}
+
+
+.filters.is-open {
+  opacity: 1;
+  transform: translateY(0);
+
+  pointer-events: auto;
+}
+
+
+@media only screen and (min-width: 1440px) {
+  .filters {
     position: relative;
     top: auto;
-    left: auto;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
     padding: 0;
+    transition: none;
+    background-color: transparent;
   }
 }
 
