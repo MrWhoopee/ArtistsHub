@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initSliders();
 });
 
+initHeader();
+
 // TESTS!!!!!!!!!!!!!!!!!!!!!!!!!
 // const result = await getArtistInfoById('65b0fda6ba67998416821076');
 // renderArtistModal(result);
