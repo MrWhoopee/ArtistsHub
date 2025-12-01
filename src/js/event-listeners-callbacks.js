@@ -190,15 +190,14 @@ export async function onLearnMoreClick(e) {
   try {
     const artistId = await getArtistInfoById(e.target.dataset.id);
     renderArtistModal(artistId);
-
-    showModalContent();
-
-    const bio = artistModalEl.querySelector('.modal-info-text');
-    if (bio) bio.scrollTop = 0;
   } catch (error) {
     console.log(error);
   } finally {
     hideModalLoader();
+    showModalContent();
+
+    const bio = artistModalEl.querySelector('.modal-info-text');
+    if (bio) bio.scrollTop = 0;
   }
 }
 
