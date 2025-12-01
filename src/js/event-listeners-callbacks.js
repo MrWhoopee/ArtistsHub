@@ -19,6 +19,7 @@ import {
   artistsNotFoundEl,
   backdropWithModalEl,
   searchFormEl,
+  artistModalEl,
 } from './refs';
 import { renderArtistModal } from './render-artist-modal';
 // import { document } from 'postcss';
@@ -189,11 +190,15 @@ export async function onLearnMoreClick(e) {
   try {
     const artistId = await getArtistInfoById(e.target.dataset.id);
     renderArtistModal(artistId);
+
+    showModalContent();
+
+    const bio = artistModalEl.querySelector('.modal-info-text');
+    if (bio) bio.scrollTop = 0;
   } catch (error) {
     console.log(error);
   } finally {
     hideModalLoader();
-    showModalContent();
   }
 }
 
