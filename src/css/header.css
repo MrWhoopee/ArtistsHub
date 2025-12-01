@@ -1,21 +1,3 @@
-/* I copied this class from the main container because other elements use this naming in another file,
-but it added wrong styles that broke my layout. */
-
-/* .container-header {
-    max-width: 320px;
-    margin: 0 auto;
-    padding: 0 16px;
-
-    @media only screen and (min-width: 768px) {
-        max-width: 768px;
-        padding: 0 32px;
-    }
-
-    @media only screen and (min-width: 1440px) {
-        max-width: 1440px;
-        padding: 0 64px;
-    }
-} */
 
 .header {
   position: relative;
@@ -41,6 +23,12 @@ but it added wrong styles that broke my layout. */
   height: 51px;
 }
 
+.header-logo-icon:hover,
+.header-logo-icon:focus {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 .burger-btn {
   display: flex;
   justify-content: center;
@@ -52,6 +40,13 @@ but it added wrong styles that broke my layout. */
     display: none;
   }
 }
+
+.burger-btn:hover,
+.burger-btn:focus {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 
 .burger-icon,
 .cross-icon {
@@ -85,6 +80,12 @@ but it added wrong styles that broke my layout. */
   }
 }
 
+.menu-item:hover,
+.menu-item:focus {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 /* -------  menu - open --------*/
 
 .menu-burger-modal {
@@ -101,9 +102,11 @@ but it added wrong styles that broke my layout. */
   box-sizing: border-box;
   pointer-events: auto;
   z-index: 999;
+
+  transition: opacity 500ms linear;
 }
 
-.menu-burger-close-btn {
+.cross-icon {
   top: 26px;
   right: 30px;
   line-height: 0;
@@ -126,4 +129,21 @@ but it added wrong styles that broke my layout. */
   font-weight: 500;
   font-size: 26px;
   color: var(--color-scheme-1-text);
+}
+
+.menu-burger-item:hover,
+.menu-burger-item:focus {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 500ms linear;
+}
+
+.menu-burger-item {
+  width: 100%;
+}
+
+.menu-burger-link {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
 }
