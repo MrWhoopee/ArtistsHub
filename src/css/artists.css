@@ -324,7 +324,7 @@
   gap: 4px;
 }
 
-.arrow-btn,
+.artists-arrow-btn,
 .page-btn {
   display: flex;
   justify-content: center;
@@ -333,7 +333,7 @@
   padding: 10px 17px;
 }
 
-.arrow-btn {
+.artists-arrow-btn {
   fill: var(--color-scheme-1-text);
   padding: 8px 12px;
 }
