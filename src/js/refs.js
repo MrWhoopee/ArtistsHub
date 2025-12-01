@@ -11,5 +11,11 @@ export const genresListEl = document.querySelector('.js-genres-list');
 export const filterBtnEl = document.querySelector('.filter-btn');
 export const searchFormEl = document.querySelector('.filters');
 export const artistsNotFoundEl = document.querySelector('.artists-not-found');
-
 export const resetBtnEl = document.querySelectorAll('.js-reset-btn');
+
+export const loaderEl = document.querySelector('.loader');
+export const modalContentEl = document.querySelector('.modal-content');
+// export const artistsContentEl = document.querySelector('.artists-content');
+// export const artistsListContentEl = document.querySelector(
+//   '.artists-list-content'
+// );

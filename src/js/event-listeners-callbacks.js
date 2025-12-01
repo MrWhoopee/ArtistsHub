@@ -1,7 +1,13 @@
 import { getTotalPages } from './helpers';
 import { getArtistInfoById, getArtists } from './soundwawe-api';
 import { renderArtistList } from './render-artists';
-import { renderPagination } from './render-artists';
+import {
+  renderPagination,
+  showLoader,
+  hideLoader,
+  showModalContent,
+  hideModalContent,
+} from './render-artists';
 import {
   artistListEl,
   artistModalPagesEl,
@@ -140,12 +146,23 @@ export async function onArtistModalPagesClick(e) {
 
 export async function onLearnMoreClick(e) {
   backdropWithModalEl.classList.add('is-open');
-  const artistId = await getArtistInfoById(e.target.dataset.id);
-  renderArtistModal(artistId);
   document.body.style.overflow = 'hidden';
+
+  hideModalContent();
+  showLoader();
 
   backdropWithModalEl.addEventListener('click', onCloseModal);
   document.addEventListener('keydown', onEscClose);
+
+  try {
+    const artistId = await getArtistInfoById(e.target.dataset.id);
+    renderArtistModal(artistId);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    hideLoader();
+    showModalContent();
+  }
 }
 
 export function onCloseModal(e) {
