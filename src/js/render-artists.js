@@ -48,10 +48,11 @@ export function renderPagination(page, totalPages) {
   if (page > totalPages) return;
   // Kostyli
   let html = '';
+  const innerWidth = window.innerWidth;
 
   // ← Previous
   html += `
-    <a href="#artists" class="page-btn arrow-btn" ${
+    <a href="#artists-content" class="page-btn artists-arrow-btn" ${
       page === 1 ? 'disabled' : ''
     } data-page="${page - 1}">
       <svg width="24" height="24">
@@ -62,49 +63,49 @@ export function renderPagination(page, totalPages) {
 
   // Pages
   // First page
-  html += `<a href="#artists" class="page-btn ${
+  html += `<a href="#artists-content" class="page-btn ${
     page === 1 ? 'active' : ''
   }" data-page="1">1</a>`;
 
   // Dots after first page
-  if (page > 3) {
+  if (page > 3 || (innerWidth < 768 && page > 2)) {
     html += `<span class="dots">...</span>`;
   }
 
   // Previous neighbor
-  if (page > 2) {
-    html += `<a href="#artists" class="page-btn" data-page="${page - 1}">${
+  if (page > 2 && innerWidth >= 768) {
+    html += `<a href="#artists-content" class="page-btn" data-page="${
       page - 1
-    }</a>`;
+    }">${page - 1}</a>`;
   }
 
   // Current page (if not first and not last)
   if (page !== 1 && page !== totalPages) {
-    html += `<a href="#artists" class="page-btn active" data-page="${page}">${page}</a>`;
+    html += `<a href="#artists-content" class="page-btn active" data-page="${page}">${page}</a>`;
   }
 
   // Next neighbor
-  if (page < totalPages - 1) {
-    html += `<a href="#artists" class="page-btn" data-page="${page + 1}">${
+  if (page < totalPages - 1 && innerWidth >= 768) {
+    html += `<a href="#artists-content" class="page-btn" data-page="${
       page + 1
-    }</a>`;
+    }">${page + 1}</a>`;
   }
 
   // Dots before last page
-  if (page < totalPages - 2) {
+  if (page < totalPages - 2 || (innerWidth < 768 && totalPages - 1)) {
     html += `<span class="dots">...</span>`;
   }
 
   // Last page
   if (totalPages > 1) {
-    html += `<a href="#artists" class="page-btn ${
+    html += `<a href="#artists-content" class="page-btn ${
       page === totalPages ? 'active' : ''
     }" data-page="${totalPages}">${totalPages}</a>`;
   }
 
   // → Next
   html += `
-    <a href="#artists" class="page-btn arrow-btn" ${
+    <a href="#artists-content" class="page-btn artists-arrow-btn" ${
       page === totalPages ? 'disabled' : ''
     } data-page="${page + 1}">
       <svg width="24" height="24">

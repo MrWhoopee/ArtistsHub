@@ -1,11 +1,20 @@
 import './js/feedback';
 import './js/search-form';
-import { artistModalPagesEl, genresListEl, searchFormEl, artistListEl } from './js/refs';
+import {
+  artistModalPagesEl,
+  genresListEl,
+  searchFormEl,
+  artistListEl,
+  filterBtnEl,
+  resetBtnEl,
+} from './js/refs';
 import {
   onSearchArtistsByInput,
   onSearchArtistsByClick,
   onArtistModalPagesClick,
   onLearnMoreClick,
+  onFilterClick,
+  onResetClick,
 } from './js/event-listeners-callbacks';
 import {
   renderArtistList,
@@ -14,6 +23,7 @@ import {
   renderGenresList,
 } from './js/render-artists';
 import { getTotalPages } from './js/helpers';
+import './js/feedback-modal';
 import {
   getAllGenres,
   getArtistInfoById,
@@ -24,12 +34,14 @@ import {
   renderArtistModal,
 } from './js/render-artist-modal';
 
+import { initSliders, renderSlider, getSliderImages } from './js/hero-slider';
+import { initHeader } from './js/header';
 
-import { initSliders } from './js/hero-slider';
+// document.addEventListener('DOMContentLoaded', () => {
+//   initSliders();
+// });
 
-document.addEventListener('DOMContentLoaded', () => {
-  initSliders();
-});
+initHeader();
 
 // TESTS!!!!!!!!!!!!!!!!!!!!!!!!!
 // const result = await getArtistInfoById('65b0fda6ba67998416821076');
@@ -41,7 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function init() {
   const { artists, totalArtists } = await getArtists();
+  const sliderImages = getSliderImages(artists);
+
+  renderSlider(sliderImages.map(src => ({ strArtistThumb: src })));
   renderArtistList(artists);
+
   const genres = await getAllGenres();
   renderPagination(1, getTotalPages(totalArtists));
   renderGenresList(genres);
@@ -52,10 +68,11 @@ init();
 searchFormEl.addEventListener('input', onSearchArtistsByInput);
 searchFormEl.addEventListener('click', onSearchArtistsByClick);
 artistModalPagesEl.addEventListener('click', onArtistModalPagesClick);
-
+filterBtnEl.addEventListener('click', onFilterClick);
+resetBtnEl.forEach(btn => btn.addEventListener('click', onResetClick));
 artistListEl.addEventListener('click', e => {
-  const btnClick = e.target.closest('.learn-more-btn')
+  const btnClick = e.target.closest('.learn-more-btn');
 
-  if (!btnClick) return
-  onLearnMoreClick(e)
-})
+  if (!btnClick) return;
+  onLearnMoreClick(e);
+});

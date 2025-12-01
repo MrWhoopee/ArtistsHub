@@ -33,6 +33,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
 
   @media only screen and (min-width: 1440px) {
     flex-direction: row;
@@ -82,6 +83,7 @@
 }
 
 .filter-btn {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,6 +101,8 @@
   font-size: 18px;
   line-height: 1.5;
   color: var(--color-white);
+  /* its about animation */
+  /* z-index: 10; */
 
   @media only screen and (min-width: 1440px) {
     display: none;
@@ -107,7 +111,7 @@
 
 
 .filters {
-  display: flex;
+  display: none;
   flex-direction: column;
   position: absolute;
   /* top: calc(100% + 12px); */
@@ -281,7 +285,9 @@
     max-width: 704px;
   }
 }
-
+.icon-info{
+  fill: var(--color-scheme-1-text);
+}
 .artists-not-found-title {
   font-weight: 700;
   font-size: 32px;
@@ -313,6 +319,11 @@
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
     inset 0 32px 24px 0 var(--opacity-white-5);
   background-color: var(--color-affair);
+  color: var(--color-scheme-2-text);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-scheme-2-text);
 
   @media screen and (min-width: 768px) {
     margin-left: 0;
@@ -327,7 +338,7 @@
   gap: 4px;
 }
 
-.arrow-btn,
+.artists-arrow-btn,
 .page-btn {
   display: flex;
   justify-content: center;
@@ -336,7 +347,7 @@
   padding: 10px 17px;
 }
 
-.arrow-btn {
+.artists-arrow-btn {
   fill: var(--color-scheme-1-text);
   padding: 8px 12px;
 }
