@@ -1,13 +1,13 @@
-# **ArtistsHub** ![logo ArtistsHub](./src/img/readme/logoArtistHub.png)
+# **![logo ArtistsHub](./src/img/readme/logoArtistHub.png)**
 
 A platform for discovering artists, browsing their works, reading details, and
 leaving feedback.
 
-#### **🌐 Live Demo:**
+## **🌐 Live Demo:**
 
 https://vitaliidevx.github.io/ArtistsHub/
 
-#### **📌 Overview**
+## **📌 Overview**
 
 ArtistsHub is a responsive web application that allows users to:
 
@@ -24,23 +24,23 @@ Receive success/error notifications via iziToast
 The platform is designed for smooth performance, clean UI, optimized images (1x
 / 2x), and a user-friendly experience.
 
-#### **📸 Screenshots**
+## **📸 Screenshots**
 
-##### ⭐ Home Page
+### ⭐ Home Page
 
 ![Homepage preview](./src/img/readme/hero.png)
 
-##### 👩‍🎨 Artist Cards
+### 👩‍🎨 Artist Cards
 
 ![Artist Cards](./src/img/readme/artists.png)
 
-##### 🖼️ Artwork Modal
+### 🖼️ Artwork Modal
 
 ![Artist Modal](./src/img/readme/modal-artists.png)
 
-#### **🚀 Features**
+## **🚀 Features**
 
-##### 🔎 Artist \& Artwork Browsing
+### 🔎 Artist \& Artwork Browsing
 
 Responsive card grid
 
@@ -48,12 +48,12 @@ Smooth interactions
 
 Hover states \& transitions
 
-##### 📄 Pagination
+### 📄 Pagination
 
-The app uses page-by-page pagination instead of a “Load More” button for better
+The app uses page-by-page pagination instead of a "Load More" button for better
 UX and easier navigation.
 
-##### 📝 Feedback System
+### 📝 Feedback System
 
 Built-in modal
 
@@ -61,15 +61,15 @@ Validation on inputs
 
 Success message displayed after sending feedback
 
-##### 🖼️ Image Optimization
+### 🖼️ Image Optimization
 
 All images optimized in 1x and 2x versions
 
 Responsive loading for better performance
 
-#### **🛠️ Technologies Used**
+## **🛠️ Technologies Used**
 
-##### Core Stack
+### Core Stack
 
 HTML5, CSS3, JavaScript
 
@@ -83,7 +83,7 @@ iziToast for notifications
 
 raty-js for rating system
 
-##### Dev Dependencies
+### Dev Dependencies
 
 "devDependencies": {
 
@@ -115,9 +115,9 @@ raty-js for rating system
 
 }
 
-#### **🧑‍💻 Team**
+## **🧑‍💻 Team**
 
-##### Authors \& Contributors:
+### Authors \& Contributors:
 
 Olesia Tsaturian
 
