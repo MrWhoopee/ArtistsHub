@@ -150,17 +150,30 @@ export async function onArtistModalPagesClick(e) {
   const btn = e.target.closest('.page-btn');
   if (!btn || btn.disabled || btn.classList.contains('active')) return;
 
-  const newPage = Number(btn.dataset.page);
+  try {
+    const newPage = Number(btn.dataset.page);
 
-  if (newPage < 1) return;
+    if (newPage < 1) return;
 
-  currentPage = newPage;
+    currentPage = newPage;
 
-  const { artists, totalArtists } = await getArtists(currentQuery, currentPage);
-  const totalPages = getTotalPages(totalArtists);
+    hideArtistsContent();
+    showArtistsLoader();
 
-  renderArtistList(artists);
-  renderPagination(currentPage, totalPages);
+    const { artists, totalArtists } = await getArtists(
+      currentQuery,
+      currentPage
+    );
+    const totalPages = getTotalPages(totalArtists);
+
+    renderArtistList(artists);
+    renderPagination(currentPage, totalPages);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    hideArtistsLoader();
+    showArtistsContent();
+  }
 }
 
 export async function onLearnMoreClick(e) {
