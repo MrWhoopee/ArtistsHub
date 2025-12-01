@@ -2,9 +2,10 @@ import {
   artistListEl,
   artistModalPagesEl,
   genresListEl,
-  loaderEl,
+  modalLoaderEl,
   modalContentEl,
   artistsListContentEl,
+  artistsLoaderEl,
 } from './refs';
 import sprite from '../img/sprite.svg';
 
@@ -126,12 +127,20 @@ export function renderPagination(page, totalPages) {
 
 // loader
 
-export function showLoader() {
-  loaderEl.classList.remove('is-hidden');
+export function showModalLoader() {
+  modalLoaderEl.classList.remove('is-hidden');
 }
 
-export function hideLoader() {
-  loaderEl.classList.add('is-hidden');
+export function hideModalLoader() {
+  modalLoaderEl.classList.add('is-hidden');
+}
+
+export function showArtistsLoader() {
+  artistsLoaderEl.classList.remove('is-hidden');
+}
+
+export function hideArtistsLoader() {
+  artistsLoaderEl.classList.add('is-hidden');
 }
 
 // modal content
@@ -144,8 +153,6 @@ export function hideModalContent() {
   modalContentEl.classList.add('is-hidden');
 }
 
-//! треба використати (разом з лоадером) і додати is-hidden на artists-content
-
 export function showArtistsContent() {
   artistsListContentEl.classList.remove('is-hidden');
 }
@@ -153,11 +160,3 @@ export function showArtistsContent() {
 export function hideArtistsContent() {
   artistsListContentEl.classList.add('is-hidden');
 }
-
-// export function showArtistsListContent() {
-//   artistsListContentEl.classList.remove('is-hidden');
-// }
-
-// export function hideArtistsListContent() {
-//   artistsListContentEl.classList.add('is-hidden');
-// }

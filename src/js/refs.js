@@ -13,12 +13,9 @@ export const searchFormEl = document.querySelector('.filters');
 export const artistsNotFoundEl = document.querySelector('.artists-not-found');
 export const resetBtnEl = document.querySelectorAll('.js-reset-btn');
 
-export const loaderEl = document.querySelector('.loader');
+export const modalLoaderEl = document.querySelector('.modal-loader');
+export const artistsLoaderEl = document.querySelector('.artists-loader');
 export const modalContentEl = document.querySelector('.modal-content');
 export const artistsListContentEl = document.querySelector(
   '.artist-list-wrapper'
 );
-// export const artistsContentEl = document.querySelector('.artists-content');
-// export const artistsListContentEl = document.querySelector(
-//   '.artists-list-content'
-// );

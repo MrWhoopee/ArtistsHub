@@ -1,12 +1,15 @@
 import { getTotalPages } from './helpers';
 import { getArtistInfoById, getArtists } from './soundwawe-api';
-import { renderArtistList } from './render-artists';
+
 import {
+  renderArtistList,
   renderPagination,
-  showLoader,
-  hideLoader,
+  showModalLoader,
+  hideModalLoader,
   showModalContent,
   hideModalContent,
+  showArtistsLoader,
+  hideArtistsLoader,
   showArtistsContent,
   hideArtistsContent,
 } from './render-artists';
@@ -40,6 +43,9 @@ export async function checkArtistResponse(currentQuery, currentPage) {
 
 export async function onSearchArtistsByInput(e) {
   try {
+    hideArtistsContent();
+    showArtistsLoader();
+
     const name = e.target.value.trim();
 
     if (name.length === previousInputValue.length) {
@@ -56,14 +62,11 @@ export async function onSearchArtistsByInput(e) {
 
     currentPage = 1;
 
-    hideArtistsContent();
-    showLoader();
-
-    checkArtistResponse(currentQuery, currentPage);
+    await checkArtistResponse(currentQuery, currentPage);
   } catch (error) {
     console.log(error);
   } finally {
-    hideLoader();
+    hideArtistsLoader();
     showArtistsContent();
   }
 }
@@ -122,7 +125,11 @@ export async function onSearchArtistsByClick(e) {
             }
           }
           currentPage = 1;
-          checkArtistResponse(currentQuery, currentPage);
+
+          hideArtistsContent();
+          showArtistsLoader();
+
+          await checkArtistResponse(currentQuery, currentPage);
         }
       }
 
@@ -132,6 +139,9 @@ export async function onSearchArtistsByClick(e) {
     }
   } catch (error) {
     console.log(error);
+  } finally {
+    hideArtistsLoader();
+    showArtistsContent();
   }
 }
 // IM SERIOUSLY
@@ -158,7 +168,7 @@ export async function onLearnMoreClick(e) {
   document.body.style.overflow = 'hidden';
 
   hideModalContent();
-  showLoader();
+  showModalLoader();
 
   backdropWithModalEl.addEventListener('click', onCloseModal);
   document.addEventListener('keydown', onEscClose);
@@ -169,7 +179,7 @@ export async function onLearnMoreClick(e) {
   } catch (error) {
     console.log(error);
   } finally {
-    hideLoader();
+    hideModalLoader();
     showModalContent();
   }
 }

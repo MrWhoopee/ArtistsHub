@@ -21,8 +21,8 @@ import {
   renderArtistGenresList,
   renderPagination,
   renderGenresList,
-  showLoader,
-  hideLoader,
+  showArtistsLoader,
+  hideArtistsLoader,
   showArtistsContent,
   hideArtistsContent,
 } from './js/render-artists';
@@ -57,7 +57,7 @@ initHeader();
 
 async function init() {
   hideArtistsContent();
-  showLoader();
+  showArtistsLoader();
 
   try {
     const { artists, totalArtists } = await getArtists();
@@ -72,7 +72,7 @@ async function init() {
   } catch (error) {
     console.log(error);
   } finally {
-    hideLoader();
+    hideArtistsLoader();
     showArtistsContent();
   }
 }
