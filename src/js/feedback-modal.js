@@ -2,20 +2,22 @@ import Raty from 'raty-js';
 import axios from 'axios';
 import iziToast from 'izitoast';
 
-const BASE_URL = 'https://sound-wave.b.goit.study/api';
+import {
+  BASE_URL,
+  feedbackBtnEl,
+  feedbackBackdropEl,
+  feedbackFormEl,
+  feedbackCloseBtn,
+  bodyElement,
+  rating,
+} from './refs';
+
 const FEEDBACK_PATH = '/feedbacks';
-
-const feedbackBtnEl = document.querySelector('.js-feedback-btn');
-const feedbackBackdropEl = document.querySelector('.backdrop-feedback-modal');
-const feedbackFormEl = document.querySelector('.feedback-modal-form');
-const feedbackCloseBtn = document.querySelector('.js-feedback-modal-close-btn');
-const bodyElement = document.body;
-const rating = document.querySelector('[data-raty]');
-
 const nameErrorEl = feedbackFormEl.querySelector('[data-error-for="name"]');
 const messageErrorEl = feedbackFormEl.querySelector(
   '[data-error-for="message"]'
 );
+
 const ratingErrorEl = feedbackFormEl.querySelector('[data-error-for="rating"]');
 
 const nameInput = feedbackFormEl.elements.name;
@@ -25,11 +27,11 @@ const messageInput = feedbackFormEl.elements.message;
 const raty = new Raty(rating, {
   starType: 'i',
   click(score) {
-    // якщо юзер вибрав хоча б 1 зірку – знімаємо помилку
     if (score >= 1) {
       rating.classList.remove('feedback-modal-error');
       ratingErrorEl.textContent = '';
     }
+    addDataFromLSToForm(score);
   },
 });
 
@@ -74,7 +76,7 @@ const validateFeedbackData = data => {
   return true;
 };
 
-const onClickValidationCheck = () => {
+const onFeedbackInput = () => {
   const nameValue = nameInput.value.trim();
   const messageValue = messageInput.value.trim();
 
@@ -86,6 +88,7 @@ const onClickValidationCheck = () => {
     messageInput.classList.remove('feedback-modal-error');
     messageErrorEl.textContent = '';
   }
+  addDataFromLSToForm();
 };
 
 // ! Дія на кнопку сабміт
@@ -125,6 +128,8 @@ const onFeedbackFormSubmit = async event => {
       message: 'Error submitting feedback',
       position: 'topRight',
       color: '#af4040',
+      messageColor: 'black',
+      overlay: true,
     });
   }
 };
@@ -133,14 +138,14 @@ const onfeedbackCloseBtnClick = () => {
   feedbackBackdropEl.classList.remove('is-open');
   bodyElement.classList.remove('no-scroll');
 
-  localStorage.removeItem('feedbackFormData');
-  feedbackFormEl.reset();
-  raty.score(0);
+  window.removeEventListener('keydown', onEscPress);
 };
 
 const onfeedbackBtnClick = () => {
   feedbackBackdropEl.classList.add('is-open');
   bodyElement.classList.add('no-scroll');
+
+  window.addEventListener('keydown', onEscPress);
 };
 
 const onEscPress = ({ key }) => {
@@ -165,8 +170,8 @@ const getDataFromLS = () => {
   onfeedbackBtnClick();
 
   if (savedData) {
-    feedbackFormEl.elements.name.value = savedData.name || '';
-    feedbackFormEl.elements.message.value = savedData.descr || '';
+    feedbackFormEl.elements.name.value = savedData.name;
+    feedbackFormEl.elements.message.value = savedData.descr;
 
     if (savedData.rating) {
       raty.score(savedData.rating);
@@ -174,11 +179,22 @@ const getDataFromLS = () => {
   }
 };
 
-const addDataFromLSToForm = () => {
+const addDataFromLSToForm = forcedRating => {
+  const name = feedbackFormEl.elements.name.value.trim();
+  const descr = feedbackFormEl.elements.message.value.trim();
+
+  const ratingValue =
+    typeof forcedRating === 'number' ? forcedRating : raty.score();
+
+  if (!name && !descr && !rating) {
+    localStorage.removeItem('feedbackFormData');
+    return;
+  }
+
   const formData = {
-    name: feedbackFormEl.elements.name.value.trim(),
-    descr: feedbackFormEl.elements.message.value.trim(),
-    rating: raty.score(),
+    name,
+    descr,
+    rating: ratingValue,
   };
 
   localStorage.setItem('feedbackFormData', JSON.stringify(formData));
@@ -192,14 +208,14 @@ feedbackCloseBtn.addEventListener('click', onfeedbackCloseBtnClick);
 
 window.addEventListener('keydown', onEscPress);
 
-window.addEventListener('click', onBackdropClickClose);
+feedbackBackdropEl.addEventListener('click', onBackdropClickClose);
 
 //! видалення помилки валідації при введенні полів
-feedbackFormEl.addEventListener('input', onClickValidationCheck);
+feedbackFormEl.addEventListener('input', onFeedbackInput);
 
 //! відправка на бекенд
 feedbackFormEl.addEventListener('submit', onFeedbackFormSubmit);
 
 //! збереження, видалення і отримання даних з LS
 window.addEventListener('DOMContentLoaded', getDataFromLS);
-feedbackFormEl.addEventListener('click', addDataFromLSToForm);
+feedbackFormEl.addEventListener('input', onFeedbackInput);
