@@ -1,160 +1,78 @@
-// import iziToast from 'izitoast';
-// import errorUrl from './img/error.svg';
-// import cautionUrl from './img/caution.svg';
-// import infoUrl from './img/bell.svg';
-// import { getImagesByQuery, PER_PAGE } from './js/pixabay-api';
-// import {
-//   clearGallery,
-//   createGallery,
-//   hideLoader,
-//   hideLoadMoreButton,
-//   showLoader,
-//   showLoadMoreButton,
-// } from './js/render-functions';
+import './js/feedback';
+import './js/search-form';
+import {
+  artistModalPagesEl,
+  genresListEl,
+  searchFormEl,
+  artistListEl,
+  filterBtnEl,
+  resetBtnEl,
+} from './js/refs';
+import {
+  onSearchArtistsByInput,
+  onSearchArtistsByClick,
+  onArtistModalPagesClick,
+  onLearnMoreClick,
+  onFilterClick,
+  onResetClick,
+} from './js/event-listeners-callbacks';
+import {
+  renderArtistList,
+  renderArtistGenresList,
+  renderPagination,
+  renderGenresList,
+} from './js/render-artists';
+import { getTotalPages } from './js/helpers';
+import './js/feedback-modal';
+import {
+  getAllGenres,
+  getArtistInfoById,
+  getArtists,
+} from './js/soundwawe-api';
+import {
+  renderArtistModalAlbumsList,
+  renderArtistModal,
+} from './js/render-artist-modal';
 
-// export const refs = {
-//   form: document.querySelector('.form'),
-//   gallery: document.querySelector('.gallery'),
-//   loadMoreBtn: document.querySelector('.load-more-btn'),
-//   loader: document.querySelector('.loader'),
-// };
+import { initSliders, renderSlider, getSliderImages } from './js/hero-slider';
+import { initHeader } from './js/header';
 
-// let page = 1;
-// let currentQuery = '';
+// document.addEventListener('DOMContentLoaded', () => {
+//   initSliders();
+// });
 
-// refs.form.addEventListener('submit', onSubmit);
-// refs.loadMoreBtn.addEventListener('click', onClick);
+initHeader();
 
-// async function onSubmit(e) {
-//   e.preventDefault();
+// TESTS!!!!!!!!!!!!!!!!!!!!!!!!!
+// const result = await getArtistInfoById('65b0fda6ba67998416821076');
+// renderArtistModal(result);
+// const { artists, totalArtists } = await getArtists();
+// renderArtistList(artists);
+// renderPagination(currentPage, getTotalPages(totalArtists));
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-//   const query = e.target.elements.search_text.value.trim();
+async function init() {
+  const { artists, totalArtists } = await getArtists();
+  const sliderImages = getSliderImages(artists);
 
-//   if (query === '') {
-//     iziToast.warning({
-//       title: 'Caution',
-//       message: 'The search field cannot be empty',
-//       position: 'topRight',
-//       backgroundColor: '#ffa000',
-//       titleColor: '#fff',
-//       messageColor: '#fff',
-//       progressBarColor: '#bb7b10',
-//       close: true,
-//       iconUrl: cautionUrl,
-//       class: 'my-toast',
-//     });
+  renderSlider(sliderImages.map(src => ({ strArtistThumb: src })));
+  renderArtistList(artists);
 
-//     return;
-//   }
+  const genres = await getAllGenres();
+  renderPagination(1, getTotalPages(totalArtists));
+  renderGenresList(genres);
+}
+init();
 
-//   currentQuery = query;
+// -------------------EVENT LISTENERS-------------------
+searchFormEl.addEventListener('input', onSearchArtistsByInput);
+searchFormEl.addEventListener('click', onSearchArtistsByClick);
+artistModalPagesEl.addEventListener('click', onArtistModalPagesClick);
+filterBtnEl.addEventListener('click', onFilterClick);
+resetBtnEl.forEach(btn => btn.addEventListener('click', onResetClick));
+artistListEl.addEventListener('click', e => {
+  const btnClick = e.target.closest('.learn-more-btn');
 
-//   clearGallery();
-//   page = 1;
-
-//   await fetchImages();
-// }
-
-// async function onClick(e) {
-//   const cards = Array.from(refs.gallery.querySelectorAll('.card'));
-
-//   page++;
-
-//   await fetchImages();
-
-//   // прокрутка як по завданню
-//   // const firstCard = document.querySelector('.gallery .card');
-//   // if (!firstCard) return;
-//   // const { height: cardHeight } = firstCard.getBoundingClientRect();
-//   // window.scrollBy({ top: cardHeight * 2, behavior: 'smooth' });
-
-//   // прокрутка з врахуванням кількості картинок в рядках і висоти екрану
-//   const viewportHeight = window.innerHeight;
-
-//   const columnCount = Math.floor(
-//     document.querySelector('.container').offsetWidth / cards[0].offsetWidth
-//   );
-
-//   let cardToScroll = null;
-
-//   const rowCount = cards.length / columnCount;
-
-//   if (rowCount < 1) {
-//     return;
-//   } else if (rowCount % 1 === 0) {
-//     cardToScroll = cards
-//       .reverse()
-//       .find(card => card.getBoundingClientRect().bottom < viewportHeight);
-//   } else {
-//     cardToScroll = cards[Math.floor(rowCount) * columnCount - 1];
-//   }
-
-//   window.scrollBy({
-//     top: cardToScroll.getBoundingClientRect().bottom,
-//     behavior: 'smooth',
-//   });
-// }
-
-// async function fetchImages() {
-//   hideLoadMoreButton();
-//   showLoader();
-
-//   try {
-//     const { images, totalImageCount } = await getImagesByQuery(
-//       currentQuery,
-//       page
-//     );
-
-//     if (images.length === 0) {
-//       iziToast.error({
-//         title: 'Error',
-//         message:
-//           'Sorry, there are no images matching your search query. Please try again!',
-//         position: 'topRight',
-//         backgroundColor: '#ef4040',
-//         titleColor: '#fff',
-//         messageColor: '#fff',
-//         progressBarColor: '#b51b1b',
-//         close: true,
-//         iconUrl: errorUrl,
-//         class: 'my-toast',
-//       });
-
-//       return;
-//     }
-
-//     createGallery(images);
-
-//     if (totalImageCount > page * PER_PAGE) {
-//       showLoadMoreButton();
-//     } else {
-//       iziToast.info({
-//         title: 'Info',
-//         message: "We're sorry, but you've reached the end of search results",
-//         position: 'topRight',
-//         backgroundColor: '#09f',
-//         titleColor: '#fff',
-//         messageColor: '#fff',
-//         progressBarColor: '#0071bd',
-//         close: true,
-//         iconUrl: infoUrl,
-//         class: 'my-toast',
-//       });
-//     }
-//   } catch (error) {
-//     iziToast.error({
-//       title: 'Error',
-//       message: 'Something went wrong. Please try again later.',
-//       position: 'topRight',
-//       backgroundColor: '#ef4040',
-//       titleColor: '#fff',
-//       messageColor: '#fff',
-//       progressBarColor: '#b51b1b',
-//       close: true,
-//       iconUrl: errorUrl,
-//       class: 'my-toast',
-//     });
-//   } finally {
-//     hideLoader();
-//   }
-// }
+  if (!btnClick) return;
+  onLearnMoreClick(e);
+});

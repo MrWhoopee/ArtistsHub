@@ -1,5 +1,5 @@
 {
-  "name": "ArtistsHub",
+  "name": "artists-hub",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -17,11 +17,12 @@
   "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@splidejs/splide": "^4.1.4",
+    "@splidejs/splide-extension-auto-scroll": "^0.5.3",
     "axios": "^1.13.2",
     "izitoast": "^1.4.0",
     "loaders.css": "^0.1.2",
-    "modern-normalize": "^3.0.1",
-    "simplelightbox": "^2.14.3",
+    "raty-js": "^4.3.0",
     "swiper": "^12.0.3",
     "vite-plugin-full-reload": "^1.2.0",
     "vite-plugin-html-inject": "^1.1.2"

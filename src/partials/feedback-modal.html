@@ -1,0 +1,49 @@
+<div class="backdrop-feedback-modal js-backdrop-feedback-modal">
+  <div class="feedback-modal">
+    <button
+      type="button"
+      class="feedback-modal-btn js-feedback-modal-close-btn"
+    >
+      <svg class="feedback-modal-icon-cloce" width="14" height="14">
+        <use href="../img/sprite.svg#close"></use>
+      </svg>
+    </button>
+    <h2 class="feedback-modal-header">Submit feedback</h2>
+
+    <form class="feedback-modal-form">
+      <label for="name" class="feedback-modal-label"
+        >Name
+        <div class="error-wrapper">
+          <input
+            class="feedback-modal-input"
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Emily"
+          />
+          <span class="feedback-error-text" data-error-for="name"></span>
+        </div>
+      </label>
+
+      <label for="message" class="feedback-modal-label"
+        >Message
+        <div class="error-wrapper">
+          <textarea
+            class="feedback-modal-message-area"
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Type your message..."
+          ></textarea>
+          <span class="feedback-error-text" data-error-for="message"></span>
+        </div>
+      </label>
+
+      <div class="error-wrapper">
+        <div data-raty class="feedback-modal-star"></div>
+        <span class="feedback-error-text" data-error-for="rating"></span>
+      </div>
+      <button class="feedback-modal-submit-btn" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

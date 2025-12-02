@@ -1,0 +1,226 @@
+@import url(root.css);
+
+/* @import url('./node_modules/raty-js/src/raty.css'); */
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+.backdrop-feedback-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  min-width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  background-color: rgba(30, 30, 30, 0.9);
+  transition: opacity 500ms linear;
+}
+
+.backdrop-feedback-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.feedback-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  padding: 64px 16px 58px;
+  transform: translate(-50%, -50%);
+  max-width: 288px;
+  background-color: var(--color-neutral-darkest);
+  border-radius: 16px;
+
+  @media only screen and (min-width: 768px) {
+    max-width: 640px;
+    padding: 64px 32px 64px;
+    max-height: 688px;
+  }
+
+  @media only screen and (min-width: 1440px) {
+    max-width: 736px;
+    padding: 64px;
+  }
+}
+.feedback-modal-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 9px;
+  width: 32px;
+  height: 32px;
+
+  border: none;
+  background-color: inherit;
+  fill: var(--color-white);
+  &:hover,
+  &:focus {
+    background-color: inherit;
+    fill: var(--color-affair);
+  }
+}
+
+.feedback-modal-header {
+  text-align: center;
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 130%;
+  letter-spacing: -0.01em;
+
+  @media only screen and (min-width: 768px) {
+    font-size: 44px;
+    line-height: 120%;
+    margin-bottom: 48px;
+  }
+
+  @media only screen and (min-width: 1440px) {
+    font-size: 60px;
+  }
+}
+.feedback-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @media only screen and (min-width: 768px) {
+    gap: 24px;
+  }
+}
+
+.feedback-modal-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 18px;
+  color: var(--color-white);
+  text-align: left;
+}
+
+.feedback-modal-input {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 18px;
+  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 8px 12px;
+  height: 43px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: inherit;
+  &:hover,
+  &:focus {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+  }
+}
+
+.feedback-modal-message-area {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 18px;
+  color: var(--color-white);
+
+  resize: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 8px 12px;
+  height: 130px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: inherit;
+
+  &:hover,
+  &:focus {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+  }
+}
+
+.feedback-modal-input::placeholder {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.feedback-modal-input:focus::placeholder,
+.feedback-modal-message-area:focus::placeholder {
+  opacity: 0;
+}
+.error-wrapper {
+  position: relative;
+  width: 100%;
+}
+.feedback-error-text {
+  position: absolute;
+  left: 0px;
+  bottom: -16px;
+  font-size: 12px;
+  color: var(--color-error-red);
+  pointer-events: none;
+}
+
+.feedback-modal-error {
+  border-color: var(--color-error-red);
+  color: var(--color-error-red);
+  &:focus,
+  &:hover {
+    border-color: var(--color-error-red);
+  }
+}
+.feedback-modal-input.feedback-modal-error::placeholder,
+.feedback-modal-message-area.feedback-modal-error::placeholder {
+  color: var(--color-error-red);
+}
+
+input.my-class:-internal-autofill-selected {
+  background-color: var(--color-affair) !important;
+}
+
+.feedback-modal-submit-btn {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 18px;
+  color: var(--color-white);
+  border-radius: 12px;
+  padding: 10px 114px;
+  width: 288px;
+  height: 47px;
+  box-shadow: 0 1px 2px 0 rgba(6, 3, 7, 0.05),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(6, 3, 7, 0.15),
+    inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+    inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+  background: var(--color-affair);
+
+  @media only screen and (min-width: 768px) {
+    align-self: center;
+    /* padding: 16px 140px; */
+    width: 340px;
+  }
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 1px 2px 0 rgba(6, 3, 7, 0.05),
+      inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(6, 3, 7, 0.15),
+      inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
+      inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+    background: #764191;
+    opacity: 0.6;
+  }
+}
+
+.feedback-modal-star > i {
+  font-size: 1em !important;
+}
+.feedback-modal-star .star-off-png::before {
+  content: url('../img/feedback-star.svg');
+}
+
+.feedback-modal-star .star-on-png::before {
+  content: url('../img/filled-star-feedbeck.svg');
+}
