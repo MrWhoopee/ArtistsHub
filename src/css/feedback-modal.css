@@ -1,7 +1,5 @@
 @import url(root.css);
 
-/* @import url('./node_modules/raty-js/src/raty.css'); */
-
 body.no-scroll {
   overflow: hidden;
 }
@@ -55,10 +53,10 @@ body.no-scroll {
   padding: 9px;
   width: 32px;
   height: 32px;
-
   border: none;
   background-color: inherit;
   fill: var(--color-white);
+
   &:hover,
   &:focus {
     background-color: inherit;
@@ -104,11 +102,12 @@ body.no-scroll {
   text-align: left;
 }
 
-.feedback-modal-input {
+.feedback-modal-input,
+.feedback-modal-message-area {
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 18px;
   color: var(--color-white);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--opacity-white-20);
   border-radius: 12px;
   padding: 8px 12px;
   height: 43px;
@@ -117,36 +116,19 @@ body.no-scroll {
   background-color: inherit;
   &:hover,
   &:focus {
-    border: 1px solid rgba(255, 255, 255, 0.2);
     outline: none;
   }
 }
 
 .feedback-modal-message-area {
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 18px;
-  color: var(--color-white);
-
   resize: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: 8px 12px;
   height: 130px;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: inherit;
-
-  &:hover,
-  &:focus {
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    outline: none;
-  }
 }
 
 .feedback-modal-input::placeholder {
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--opacity-white-60);
 }
 
 .feedback-modal-input:focus::placeholder,
@@ -179,10 +161,6 @@ body.no-scroll {
   color: var(--color-error-red);
 }
 
-input.my-class:-internal-autofill-selected {
-  background-color: var(--color-affair) !important;
-}
-
 .feedback-modal-submit-btn {
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 18px;
@@ -191,36 +169,54 @@ input.my-class:-internal-autofill-selected {
   padding: 10px 114px;
   width: 288px;
   height: 47px;
-  box-shadow: 0 1px 2px 0 rgba(6, 3, 7, 0.05),
-    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(6, 3, 7, 0.15),
+  box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5),
+    inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px var(----opacity-neutral-darkest-15),
     inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
-    inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
+    inset 0 32px 24px 0 var(--opacity-white-5);
   background: var(--color-affair);
 
   @media only screen and (min-width: 768px) {
     align-self: center;
-    /* padding: 16px 140px; */
     width: 340px;
+  }
+
+  @media only screen and (min-width: 1440px) {
+    padding: 10px 24px;
+    width: 108px;
   }
 
   &:hover,
   &:focus {
-    box-shadow: 0 1px 2px 0 rgba(6, 3, 7, 0.05),
-      inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(6, 3, 7, 0.15),
+    box-shadow: 0 1px 2px 0 var(--opacity-neutral-darkest-5),
+      inset 0 -2px 1px 0 rgba(0, 0, 0, 0.2),
+      inset 0 0 0 1px var(--opacity-neutral-darkest-15),
       inset 0 2px 1px 0 rgba(255, 255, 255, 0.25),
-      inset 0 32px 24px 0 rgba(255, 255, 255, 0.05);
-    background: #764191;
+      inset 0 32px 24px 0 var(--opacity-white-5);
+    background: var(--color-affair);
     opacity: 0.6;
   }
 }
 
-.feedback-modal-star > i {
-  font-size: 1em !important;
+.feedback-modal-star {
+  line-height: 1;
 }
+
 .feedback-modal-star .star-off-png::before {
   content: url('../img/feedback-star.svg');
 }
 
 .feedback-modal-star .star-on-png::before {
   content: url('../img/filled-star-feedbeck.svg');
+
+  /* content: url('../img/icons.svg/#icon-fill-star'); */
+}
+
+/* .feedback-modal-star i {
+  font-size: 32px !important;
+  line-height: 1;
+} */
+.feedback-modal-star > i {
+  /* font-size: 1em;
+  height: 36px; */
 }
