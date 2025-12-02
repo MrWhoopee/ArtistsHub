@@ -60,6 +60,7 @@ async function renderFeedbacks() {
     });
   }
 }
+
 renderFeedbacks().then(() => {
   const swiper = new Swiper('.swiper', {
     modules: [Navigation, Pagination],
