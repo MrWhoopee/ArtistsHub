@@ -167,7 +167,8 @@ const getDataFromLS = () => {
 
   const savedData = JSON.parse(savedDataJSON);
 
-  onfeedbackBtnClick();
+  //!Reopen modal form
+  // onfeedbackBtnClick();
 
   if (savedData) {
     feedbackFormEl.elements.name.value = savedData.name;
