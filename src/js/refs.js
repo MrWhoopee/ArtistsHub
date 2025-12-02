@@ -18,3 +18,25 @@ export const modalContentEl = document.querySelector('.modal-content');
 export const artistsListContentEl = document.querySelector(
   '.artist-list-wrapper'
 );
+
+// * feedback modal
+export const BASE_URL = 'https://sound-wave.b.goit.study/api';
+export const FEEDBACK_PATH = '/feedbacks';
+export const feedbackBtnEl = document.querySelector('.js-feedback-btn');
+export const feedbackBackdropEl = document.querySelector(
+  '.backdrop-feedback-modal'
+);
+export const feedbackFormEl = document.querySelector('.feedback-modal-form');
+export const feedbackCloseBtn = document.querySelector(
+  '.js-feedback-modal-close-btn'
+);
+export const bodyElement = document.body;
+export const rating = document.querySelector('[data-raty]');
+export const nameErrorEl = feedbackFormEl.querySelector(
+  '[data-error-for="name"]'
+);
+export const messageErrorEl = feedbackFormEl.querySelector(
+  '[data-error-for="message"]');
+export const filtersDropdownWrapperEl = document.querySelector(
+  '.filters-dropdown-wrapper'
+);
