@@ -34,10 +34,10 @@ export async function checkArtistResponse(currentQuery, currentPage) {
   if (totalArtists === 0) {
     artistListEl.innerHTML = '';
     artistModalPagesEl.innerHTML = '';
-    artistsNotFoundEl.classList.remove('visually-hidden');
+    artistsNotFoundEl.classList.remove('is-hidden');
     return;
   }
-  artistsNotFoundEl.classList.add('visually-hidden');
+  artistsNotFoundEl.classList.add('is-hidden');
   renderArtistList(artists);
   renderPagination(currentPage, getTotalPages(totalArtists));
 }
@@ -248,13 +248,14 @@ export function onSearchFormFocusOut(e) {
     return;
   }
 
-  const selectListWrappers = currentTarget.querySelectorAll(
-    '.select-list-wrapper'
-  );
-  selectListWrappers.forEach(el => el.classList.add('is-hidden'));
-
-  const selectBtns = currentTarget.querySelectorAll('.select-btn');
-  selectBtns.forEach(btn => btn.nextElementSibling.classList.add('is-hidden'));
+  // Затримка потрібна, щоб клік по LI елементу встиг спрацювати
+  // перед тим, як dropdown буде захований
+  setTimeout(() => {
+    const selectListWrappers = currentTarget.querySelectorAll(
+      '.select-list-wrapper'
+    );
+    selectListWrappers.forEach(el => el.classList.add('is-hidden'));
+  }, 150);
 }
 
 let isFilterWrapperClick = false;
