@@ -19,3 +19,7 @@ export const modalContentEl = document.querySelector('.modal-content');
 export const artistsListContentEl = document.querySelector(
   '.artist-list-wrapper'
 );
+
+export const filtersDropdownWrapperEl = document.querySelector(
+  '.filters-dropdown-wrapper'
+);
