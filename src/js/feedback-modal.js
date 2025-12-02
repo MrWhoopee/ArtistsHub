@@ -167,7 +167,7 @@ const getDataFromLS = () => {
 
   const savedData = JSON.parse(savedDataJSON);
 
-  onfeedbackBtnClick();
+  // onfeedbackBtnClick();
 
   if (savedData) {
     feedbackFormEl.elements.name.value = savedData.name;
