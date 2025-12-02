@@ -1,4 +1,12 @@
-import { artistListEl, artistModalPagesEl, genresListEl } from './refs';
+import {
+  artistListEl,
+  artistModalPagesEl,
+  genresListEl,
+  modalLoaderEl,
+  modalContentEl,
+  artistsListContentEl,
+  artistsLoaderEl,
+} from './refs';
 import sprite from '../img/sprite.svg';
 import { isEmpty } from './helpers';
 
@@ -139,137 +147,38 @@ export function renderPagination(currentPage, totalPages) {
   }
 }
 
-// export function renderPagination(currentPage, totalPages) {
-//   if (totalPages === 1) {
-//     artistModalPagesEl.innerHTML = '';
-//     artistModalPagesEl.classList.add('is-hidden');
+// loader
 
-//     return;
-//   }
+export function showModalLoader() {
+  modalLoaderEl.classList.remove('is-hidden');
+}
 
-//   if (currentPage > totalPages) return;
+export function hideModalLoader() {
+  modalLoaderEl.classList.add('is-hidden');
+}
 
-//   artistModalPagesEl.classList.remove('is-hidden');
+export function showArtistsLoader() {
+  artistsLoaderEl.classList.remove('is-hidden');
+}
 
-//   let html = '';
-//   const innerWidth = window.innerWidth;
+export function hideArtistsLoader() {
+  artistsLoaderEl.classList.add('is-hidden');
+}
 
-//   // ← Previous
-//   html += addArrow(true);
-//   // html += `
-//   //   <a href="#artists-content" class="page-btn artists-arrow-btn" ${
-//   //     page === 1 ? 'disabled' : ''
-//   //   } data-page="${page - 1}">
-//   //     <svg width="24" height="24">
-//   //       <use href="${sprite}#left-arrow-btn"></use>
-//   //     </svg>
-//   //   </a>
-//   // `;
+// modal content
 
-//   // Pages
-//   // First page
-//   // html += `<a href="#artists-content" class="page-btn ${
-//   //   currentPage === 1 ? 'active' : ''
-//   // }" data-page="1">1</a>`;
+export function showModalContent() {
+  modalContentEl.classList.remove('is-hidden');
+}
 
-//   html += addPageBtn(1);
+export function hideModalContent() {
+  modalContentEl.classList.add('is-hidden');
+}
 
-//   // Dots after first page
-//   if (currentPage > 3 || (innerWidth < 768 && currentPage > 2)) {
-//     html += addDots();
-//   }
+export function showArtistsContent() {
+  artistsListContentEl.classList.remove('is-hidden');
+}
 
-//   // Previous neighbor
-//   if (currentPage > 2 && innerWidth >= 768) {
-//     html += addPageBtn(currentPage - 1);
-//     // html += `<a href="#artists-content" class="page-btn" data-page="${
-//     //   currentPage - 1
-//     // }">${currentPage - 1}</a>`;
-//   }
-
-//   // Current page (if not first and not last)
-//   if (currentPage !== 1 && currentPage !== totalPages) {
-//     html += addPageBtn(currentPage);
-//     //html += `<a href="#artists-content" class="page-btn active" data-page="${currentPage}">${currentPage}</a>`;
-//   }
-
-//   // Next neighbor
-//   if (currentPage < totalPages - 1 && innerWidth >= 768) {
-//     html += addPageBtn(currentPage);
-//     // html += `<a href="#artists-content" class="page-btn" data-page="${
-//     //   currentPage + 1
-//     // }">${currentPage + 1}</a>`;
-//   }
-
-//   // Dots before last page
-//   if (currentPage < totalPages - 2 || (innerWidth < 768 && totalPages - 1)) {
-//     html += addDots();
-//   }
-
-//   // Last page
-//   if (totalPages > 1) {
-//     html += addPageBtn(currentPage);
-//     // html += `<a href="#artists-content" class="page-btn ${
-//     //   currentPage === totalPages ? 'active' : ''
-//     // }" data-page="${totalPages}">${totalPages}</a>`;
-//   }
-
-//   // → Next
-//   html += addArrow(false);
-//   // html += `
-//   //   <a href="#artists-content" class="page-btn artists-arrow-btn" ${
-//   //     page === totalPages ? 'disabled' : ''
-//   //   } data-page="${page + 1}">
-//   //     <svg width="24" height="24">
-//   //       <use href="${sprite}#right-arrow-btn"></use>
-//   //     </svg>
-//   //   </a>
-//   // `;
-
-//   artistModalPagesEl.innerHTML = html;
-
-//   function addArrow(isLeft) {
-//     return `
-//     <a href="#artists-content" class="page-btn artists-arrow-btn" ${
-//       currentPage === (isLeft ? 1 : totalPages) ? 'disabled' : ''
-//     } data-page="${currentPage + (isLeft ? -1 : 1)}">
-//       <svg width="24" height="24">
-//         <use href="${sprite}${
-//       isLeft ? '#left-arrow-btn' : '#right-arrow-btn'
-//     }"></use>
-//       </svg>
-//     </a>
-//   `;
-//   }
-
-//   function isActive(page) {
-//     return page === currentPage || page === totalPages;
-//   }
-
-//   function addDots() {
-//     return '<span class="dots">...</span>';
-//   }
-
-//   function addPageBtn(page) {
-//     `<a href="#artists-content" class="page-btn ${
-//       isActive(page) ? 'active' : ''
-//     }" data-page="${page}">${page}</a>`;
-//   }
-// }
-// addArrow(-1);
-
-// addPageBtn(1);
-
-// addDots(1);
-
-// addPageBtn(page - 1);
-
-// addPageBtn(page);
-
-// addPageBtn(page + 1);
-
-// addDots(page + 1);
-
-// addPageBtn(totalPages);
-
-// addArrow(1);
+export function hideArtistsContent() {
+  artistsListContentEl.classList.add('is-hidden');
+}
