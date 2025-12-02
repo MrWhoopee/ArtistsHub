@@ -1,5 +1,5 @@
 .about-icon {
-    color: #FFFFFF;
+    fill: var(--color-scheme-1-text);
     width: 64px;
     height: 64px;
 
@@ -38,7 +38,7 @@
 }
 
 .about-title {
-    color: #FFFFFF;
+    color: var(--color-scheme-1-text);
     font-weight: 700;
     font-size: 44px;
     line-height: 120%;
@@ -51,7 +51,7 @@
 }
 
 .about-text {
-    color: #FFFFFF;
+    color: var(--color-scheme-1-text);
     font-size: 18px;
     line-height: 150%;
     font-family: "Epilogue", sans-serif;
