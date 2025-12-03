@@ -7,16 +7,6 @@ leaving feedback.
 
 https://vitaliidevx.github.io/ArtistsHub/
 
-## ✨ Key Features
-
-- Search and browse music artists
-- Artist cards with quick view
-- Modal with list of tracks and details
-- Pagination for easy navigation
-- Fully responsive layout
-- Feedback form with validation and iziToast notifications
-- Image optimization (1x / 2x)
-
 ## 🎯 Project Purpose
 
 ArtistsHub was created as a collaborative team project to practice modern
