@@ -114,7 +114,15 @@ export async function onSearchArtistsByClick(e) {
         input.value = e.target.textContent.trim();
       }
 
-      // NEED TO UNDERSTAND NEED TO WATCH
+      // Close UI
+      if (button) {
+        button.classList.remove('open');
+        button.focus();
+      }
+      if (listWrapper) {
+        listWrapper.classList.add('is-hidden');
+      }
+
       if (button) {
         const textNode = Array.from(button.childNodes).find(
           node => node.nodeType === Node.TEXT_NODE
@@ -123,25 +131,30 @@ export async function onSearchArtistsByClick(e) {
           const textContent = e.target.textContent.trim();
           textNode.nodeValue = textContent;
           const selectValue = select.dataset.selectName;
+          let newValue;
 
           if (selectValue === 'sortName') {
-            if (textContent === 'Default') {
-              delete currentQuery.sortName;
-            } else {
-              currentQuery = {
-                ...currentQuery,
-                [selectValue]: textContent === 'Z-A' ? 'desc' : 'asc',
-              };
-            }
+            newValue =
+              textContent === 'Default'
+                ? undefined
+                : textContent === 'Z-A'
+                ? 'desc'
+                : 'asc';
           } else {
-            if (textContent === 'All Genres') {
-              delete currentQuery.genre;
-            } else {
-              currentQuery = {
-                ...currentQuery,
-                [selectValue]: textContent,
-              };
-            }
+            newValue = textContent === 'All Genres' ? undefined : textContent;
+          }
+
+          if (currentQuery[selectValue] === newValue) {
+            return;
+          }
+
+          if (newValue === undefined) {
+            delete currentQuery[selectValue];
+          } else {
+            currentQuery = {
+              ...currentQuery,
+              [selectValue]: newValue,
+            };
           }
           currentPage = 1;
 
@@ -151,10 +164,6 @@ export async function onSearchArtistsByClick(e) {
           await checkArtistResponse(currentQuery, currentPage);
         }
       }
-
-      if (listWrapper) {
-        listWrapper.classList.add('is-hidden');
-      }
     }
   } catch (error) {
     console.log(error);
@@ -163,7 +172,6 @@ export async function onSearchArtistsByClick(e) {
     showArtistsContent();
   }
 }
-// IM SERIOUSLY
 
 export async function onArtistModalPagesClick(e) {
   const btn = e.target.closest('.page-btn');
@@ -262,6 +270,9 @@ export function onResetClick(e) {
 }
 // AI CREATED BLOCK NEW RelatedTarget
 export function onSearchFormFocusOut(e) {
+  if (isFilterWrapperClick) {
+    return;
+  }
   const currentTarget = e.currentTarget;
   const relatedTarget = e.relatedTarget;
 
@@ -279,6 +290,8 @@ export function onSearchFormFocusOut(e) {
       '.select-list-wrapper'
     );
     selectListWrappers.forEach(el => el.classList.add('is-hidden'));
+    const selectBtns = currentTarget.querySelectorAll('.select-btn');
+    selectBtns.forEach(btn => btn.classList.remove('open'));
   }, 150);
 }
 

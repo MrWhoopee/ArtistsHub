@@ -1,4 +1,4 @@
-import './js/feedback';
+import { initFeedback } from './js/feedback';
 import './js/search-form';
 import {
   artistModalPagesEl,
@@ -40,6 +40,7 @@ import { initHeader } from './js/header';
 // });
 
 initHeader();
+initFeedback();
 
 // TESTS!!!!!!!!!!!!!!!!!!!!!!!!!
 // const result = await getArtistInfoById('65b0fda6ba67998416821076');
