@@ -21,6 +21,7 @@ import {
   searchFormEl,
   artistModalEl,
   filterBtnEl,
+  header,
 } from './refs';
 import { renderArtistModal } from './render-artist-modal';
 // import { document } from 'postcss';
@@ -326,4 +327,12 @@ export function onFilterWrapperFocusOut(e) {
   e.target.classList.remove('open', 'is-open');
   searchFormEl.classList.remove('is-open');
   filterBtnEl.classList.remove('open');
+}
+
+export function onPageScroll(e) {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
 }
