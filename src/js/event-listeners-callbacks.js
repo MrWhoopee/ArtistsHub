@@ -21,6 +21,7 @@ import {
   searchFormEl,
   artistModalEl,
   filterBtnEl,
+  header,
 } from './refs';
 import { renderArtistModal } from './render-artist-modal';
 // import { document } from 'postcss';
@@ -329,8 +330,6 @@ export function onFilterWrapperFocusOut(e) {
 }
 
 export function onPageScroll(e) {
-  const header = document.querySelector('.header');
-
   if (window.scrollY > 50) {
     header.classList.add('scrolled');
   } else {
